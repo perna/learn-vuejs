@@ -1,26 +1,25 @@
-Vue.component('task-list', {
+Vue.component('message', {
 
-    template: `<ul>
-                <task v-for="task in tasks">{{task.task}}</task>
-              </ul>`,
+    props:['title', 'body'],
 
-    data() {
-
-        return { 
-            tasks: [
-                { task: 'Go to the store', complete: true },
-                { task: 'Go to the email', complete: false },
-                { task: 'Go to the farm', complete: true },
-                { task: 'Go to work', complete: false }
-            ]
+    data(){
+        return {
+            isVisible: true
         };
-    }
+    },
 
-});
+    template: `
+            <article class="message" v-show="isVisible">
+                <div class="message-header">
+                    {{ title }}
+                    <button type="button" @click="isVisible = false">x</button>
+                </div>
+                <div class="message-body">
+                    {{ body }}
+                </div>
+            </article>
 
-
-Vue.component('task', {
-    template:'<li><slot></slot></li>'
+            `
 });
 
 
